@@ -20,6 +20,11 @@
 			        </div>
 
 			        <div class="form-group">
+			            <label for="name">联系人</label>
+			            <input id="name" class="form-control bdr4" ng-model="ApplyParams.contact" type="text" />
+			        </div>
+
+			        <div class="form-group">
 	            		<label for="phone">手机号</label>
 	            		<input id="phone" class="form-control bdr4" ng-model="ApplyParams.phone" type="tel" />
 
@@ -35,7 +40,7 @@
 
 			        <div class="form-group form-group-submit">
 			        	<label for="payment">职位需求</label>
-			        	<button class="form-control bdr4" ng-click="applysModal.show()" ></button>  
+			        	<input class="form-control bdr4" ng-click="applysModal.show()" value="{{applysStr}}"/>
 		            </div>
 
 

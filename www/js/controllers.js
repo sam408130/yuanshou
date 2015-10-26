@@ -40,6 +40,16 @@ angular.module('starter.controllers', [])
     	$scope.datePickerModal = modal;
   	});
 
+  	$scope.startDate = function(){
+  		$scope.dateType = true;
+  		$scope.datePickerModal.show();
+  	};
+
+  	$scope.endDate = function(){
+  		$scope.dateType = false;
+  		$scope.datePickerModal.show();  		
+  	};
+
 
   	$scope.options = {
     	defaultDate: new Date(),
@@ -50,6 +60,13 @@ angular.module('starter.controllers', [])
 
     	dateClick: function(date) {
     		console.log(date);
+    		if ($scope.dateType){
+    			$scope.PerApplyParams.startDate = date;
+    			$scope.PerApplyParams.startDateStr = (date.month + 1) + '月' + date.day + '日'
+    		}else{
+    			$scope.PerApplyParams.endDate = date;
+    			$scope.PerApplyParams.endDateStr = (date.month + 1) + '月' + date.day + '日'    			
+    		}
         	$scope.datePickerModal.hide()      
     	},
     	changeMonth: function(month, year) {
@@ -60,7 +77,7 @@ angular.module('starter.controllers', [])
       inputEpochTime: (8 * 60 * 60),  //Optional
       step: 15,  //Optional
       format: 24,  //Optional
-      titleLabel: '选择开工时间',  //Optional
+      titleLabel: '选择上班时间',  //Optional
       setLabel: '选择',  //Optional
       closeLabel: '关闭',  //Optional
       setButtonType: 'button-balanced',  //Optional
@@ -76,9 +93,9 @@ angular.module('starter.controllers', [])
       } else {
         var selectedTime = new Date(val * 1000);
         if (selectedTime.getUTCMinutes() === 0){
-            $scope.startTime = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()+'0'
+            $scope.PerApplyParams.startTimeStr = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()+'0'
         }else{
-            $scope.startTime = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()
+            $scope.PerApplyParams.startTimeStr = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()
         }
       }
     };
@@ -104,13 +121,23 @@ angular.module('starter.controllers', [])
         var selectedTime = new Date(val * 1000);
         console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
         if (selectedTime.getUTCMinutes() === 0){
-            $scope.endTime = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()+'0'
+            $scope.PerApplyParams.endTimeStr = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()+'0'
         }else{
-            $scope.endTime = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()
+            $scope.PerApplyParams.endTimeStr = selectedTime.getUTCHours() + ':' + selectedTime.getUTCMinutes()
         }
         
       }
     };
+
+
+    $scope.saveApplying = function(){
+    	$scope.ApplyParams.applys.push($scope.PerApplyParams);
+    	$scope.applysStr = '共'+$scope.ApplyParams.applys.length + '个需求'
+    	$scope.PerApplyParams = {};
+    };
+
+
+
 })
 
 .controller('AboutCtrl',function($scope){
