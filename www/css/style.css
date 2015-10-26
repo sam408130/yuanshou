@@ -1,1 +1,266 @@
 /* Empty. Add your own CSS if you like */
+
+
+.btn-blue,.btn-line {
+	display: inline-block;
+	line-height: 1;
+	color: #fff;
+	text-align: center
+}
+
+.btn-blue {
+	border: 1px solid #54c0d5;
+	background: #54c0d5
+}
+
+.btn-blue:hover {
+	border: 1px solid #42b6cc;
+	background: #42b6cc
+}
+
+.btn-line {
+	border: 1px solid #fff
+}
+
+.btn-line:active {
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#19FFFFFF, endColorStr=#19FFFFFF);
+	background: rgba(255,255,255,.1)
+}
+
+
+::-webkit-clear-button {
+	-webkit-appearance: none
+}
+
+::-webkit-inner-spin-button {
+	visibility: hidden
+}
+
+::-webkit-calendar-picker-indicator {
+	display: none
+}
+
+a,select,input {
+	-webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+input::-webkit-input-placeholder {
+	color: #ccc;
+	line-height: 38px
+}
+
+input:-moz-placeholder {
+	color: #ccc;
+	line-height: 38px
+}
+
+input::-moz-placeholder {
+	color: #ccc;
+	line-height: 38px
+}
+
+input:-ms-input-placeholder {
+	color: #ccc;
+	line-height: 38px
+}
+
+body {
+	background: #f5f5f5
+}
+
+.apply {
+	overflow: hidden
+}
+
+.apply .top {
+	position: relative;
+	height: 80px;
+	overflow: hidden
+}
+
+.apply .top .bg {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+	width: 100%;
+	height: 80px
+}
+
+.apply .top .title {
+	height: 100%;
+	padding: 16px 26px 0;
+	font-size: 16px;
+	color: #fff;
+	line-height: 1;
+	background-color: rgba(0,0,0,.1)
+}
+
+.apply .cont {
+	position: relative;
+	top: -40px;
+	padding: 0 15px;
+	margin-bottom: -20px
+}
+
+.apply .cont .cont-inner {
+	padding: 18px 12px;
+	background: #fff;
+	box-shadow: 1px 1px 3px 0 rgba(93,113,121,.1)
+}
+
+.apply .cont .form-group {
+	position: relative;
+	margin-bottom: 16px
+}
+
+.apply .cont .form-group-submit {
+	margin-bottom: 0
+}
+
+.apply .cont .form-group label {
+	position: absolute;
+	top: 0;
+	left: 8px;
+	width: 60px;
+	height: 40px;
+	color: #666;
+	line-height: 40px
+}
+
+.apply .cont .form-group .form-control {
+	width: 100%;
+	height: 40px;
+	padding: 12px 20px 12px 70px;
+	border: 1px solid #e0e0e0;
+	font-size: 14px;
+	color: #333;
+	line-height: 1;
+	background: #fff;
+	-webkit-appearance: none
+}
+
+.apply .cont .form-group img {
+	position: absolute;
+	pointer-events: none
+}
+
+.apply .cont .form-group-select img {
+	top: 17px;
+	right: 11px;
+	height: 6px
+}
+
+.apply .cont .form-group-date img {
+	top: 13px;
+	right: 10px;
+	height: 14px
+}
+
+.apply .cont .form-group .form-control:focus {
+	border-color: #778c90
+}
+
+.apply .cont .form-group.error .form-control {
+	border-color: #ff6262
+}
+
+.apply .cont .form-group .form-submit {
+	width: 100%;
+	height: 40px;
+	margin-top: 10px;
+	border: 0;
+	background: #63c6d9;
+	font-size: 16px;
+	color: #fff;
+	line-height: 40px;
+	cursor: pointer;
+	-webkit-appearance: none
+}
+
+.apply .cont .form-group .form-submit:active {
+	background: #42b6cc
+}
+
+.apply .cont .form-group .form-submit.disabled {
+	background: #c3c3c3
+}
+
+.apply .cont .form-group .form-tips {
+	position: absolute;
+	left: 0;
+	bottom: -15px;
+	display: none;
+	height: 14px;
+	font-size: 12px;
+	color: #ff6262;
+	line-height: 14px
+}
+
+.apply .cont .form-group.error .form-tips {
+	display: block
+}
+
+.apply .cont .form-group .getcode {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 80px;
+	height: 40px;
+	background: #859a9e;
+	font-size: 12px;
+	color: #fff;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+	-moz-border-radius: 0 4px 4px 0;
+	-khtml-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0
+}
+
+.apply .cont .form-group .getcode:hover {
+	background: #778c90
+}
+
+.apply .cont .form-group .getcode.disabled {
+	background: #c3c3c3;
+	color: #fff;
+	cursor: default
+}
+
+.apply .cont .result {
+	position: relative;
+	padding: 30px 10% 20px;
+	color: #859a9e;
+	line-height: 1.8;
+	text-align: center
+}
+
+.apply .cont .result img {
+	display: block;
+	width: 180px;
+	max-width: 100%;
+	margin: 0 auto 30px
+}
+
+.apply .cont .result .title {
+	padding-bottom: 15px;
+	font-size: 26px;
+	color: #859a9e
+}
+
+.apply .cont .result .description {
+}
+
+.apply .cont .result .link {
+	width: 100%;
+	height: 40px;
+	margin-top: 20px;
+	font-size: 16px;
+	line-height: 40px
+}
+
+*,:before,:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}body,h1,h2,h3,h4,h5,h6,p,dl,dt,dd,ul,ol,li,pre,form,input,textarea,th,td{margin:0;padding:0}html{font-size:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body,button,input,select,textarea{color:#333;font:14px/1.5 "Helvetica Neue",Helvetica,"Hiragino Sans GB","Segoe UI","Microsoft Yahei",Tahoma,Arial,STHeiti,sans-serif}h1{font-size:2em}h2{font-size:1.5em}h3,h4,h5,h6{font-size:1em}a{background-color:transparent;text-decoration:none;outline:0}img{border:0;-ms-interpolation-mode:bicubic}table{border-collapse:collapse;border-spacing:0}input,textarea,select{outline:0}textarea{resize:none}ul,ol{list-style:none}
+.clearfix:after{content:'\20';display:block;height:0;clear:both}.clearfix{zoom:1}.clear{clear:both;height:0;line-height:0;font-size:0;visibility:hidden;overflow:hidden}.wordwrap{word-break:break-all;word-wrap:break-word}.ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fr{float:right}.fl{float:left}.dn{display:none}.db{display:block}.circle{-moz-border-radius:50%;-khtml-border-radius:50%;-webkit-border-radius:50%;border-radius:50%}.bdr3{-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}.bdr4{-moz-border-radius:4px;-khtml-border-radius:4px;-webkit-border-radius:4px;border-radius:4px}.bdr5{-moz-border-radius:5px;-khtml-border-radius:5px;-webkit-border-radius:5px;border-radius:5px}.bdr8{-moz-border-radius:8px;-khtml-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.op25{filter:alpha(opacity=25);-moz-opacity:.25;-khtml-opacity:.25;opacity:.25}.op40{filter:alpha(opacity=40);-moz-opacity:.4;-khtml-opacity:.4;opacity:.4}.op50{filter:alpha(opacity=50);-moz-opacity:.5;-khtml-opacity:.5;opacity:.5}.op60{filter:alpha(opacity=60);-moz-opacity:.6;-khtml-opacity:.6;opacity:.6}
+.visible-pc,.visible-pc-b,.visible-pc-i,.visible-pc-ib,.visible-mb,.visible-mb-b,.visible-mb-i,.visible-mb-ib,.visible-ph,.visible-ph-b,.visible-ph-i,.visible-ph-ib,.visible-pa,.visible-pa-b,.visible-pa-i,.visible-pa-ib{display:none!important}.visible-pc{display:block!important}table.visible-pc{display:table!important}tr.visible-pc{display:table-row!important}th.visible-pc,td.visible-pc{display:table-cell!important}.visible-pc-b{display:block!important}.visible-pc-i{display:inline!important}.visible-pc-ib{display:inline-block!important}@media (min-width:1px){.visible-pc,.visible-pc-b,.visible-pc-i,.visible-pc-ib{display:none!important}}@media (max-width:767px){.visible-ph{display:block!important}table.visible-ph{display:table!important}tr.visible-ph{display:table-row!important}th.visible-ph,td.visible-ph{display:table-cell!important}.visible-ph-b{display:block!important}.visible-ph-i{display:inline!important}.visible-ph-ib{display:inline-block!important}}@media (min-width:768px) and (max-width:999px){.visible-pa{display:block!important}table.visible-pa{display:table!important}tr.visible-pa{display:table-row!important}th.visible-pa,td.visible-pa{display:table-cell!important}.visible-pa-b{display:block!important}.visible-pa-i{display:inline!important}.visible-pa-ib{display:inline-block!important}}@media (max-width:999px){.visible-mb{display:block!important}table.visible-mb{display:table!important}tr.visible-mb{display:table-row!important}th.visible-mb,td.visible-mb{display:table-cell!important}.visible-mb-b{display:block!important}.visible-mb-i{display:inline!important}.visible-mb-ib{display:inline-block!important}}@media (min-width:1000px){.visible-pc{display:block!important}table.visible-pc{display:table!important}tr.visible-pc{display:table-row!important}th.visible-pc,td.visible-pc{display:table-cell!important}.visible-pc-b{display:block!important}.visible-pc-i{display:inline!important}.visible-pc-ib{display:inline-block!important}}@media (max-width:767px){.hidden-ph{display:none!important}}@media (min-width:768px) and (max-width:999px){.hidden-pa{display:none!important}}@media (max-width:999px){.hidden-mb{display:none!important}}@media (min-width:1000px){.hidden-pc{display:none!important}}
