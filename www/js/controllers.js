@@ -11,7 +11,52 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ApplyCtrl',function($scope){
+.controller('ApplyCtrl',function($scope,$ionicModal){
+
+	$scope.ApplyParams = {
+		name:'',
+		address:'',
+		phone:'',
+		vercode:'',
+		applys:[],
+
+	};
+
+	$scope.PerApplyParams = {};
+
+	$scope.work_type = ['服务员','洗碗工','配送员','传菜员'];
+	$scope.PhoneTips = false;
+	$scope.VerCodeTips = false;
+
+    $ionicModal.fromTemplateUrl('templates/applys.html',{
+        scope:$scope
+    }).then(function(modal){
+      	$scope.applysModal = modal;
+    });
+
+  	$ionicModal.fromTemplateUrl('templates/datePicker.html',{
+      	scope:$scope
+  	}).then(function(modal){
+    	$scope.datePickerModal = modal;
+  	});
+
+
+  	$scope.options = {
+    	defaultDate: new Date(),
+    	minDate: "2015-01-01",
+    	maxDate: "2016-12-31",
+    	dayNamesLength: 1, // 1 for "M", 2 for "Mo", 3 for "Mon"; 9 will show full day names. Default is 1.
+    	mondayIsFirstDay: true,//set monday as first day of week. Default is false
+
+    	dateClick: function(date) {
+    		console.log(date);
+        	$scope.datePickerModal.hide()      
+    	},
+    	changeMonth: function(month, year) {
+        
+    	},
+  	};
+
 
 })
 
