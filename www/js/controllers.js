@@ -11,22 +11,40 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ApplyCtrl',function($scope,$ionicModal){
+.controller('ApplyCtrl',function($scope,$ionicModal,$ionicLoading,$timeout){
 
-	$scope.ApplyParams = {
-		name:'',
-		address:'',
-		phone:'',
-		vercode:'',
-		applys:[],
+  	$scope.ApplyParams = {
+  		name:'',
+  		address:'',
+  		phone:'',
+  		vercode:'',
+  		applys:[],
 
-	};
+  	};
 
-	$scope.PerApplyParams = {};
+    var HUD = function(template){
 
-	$scope.work_type = ['服务员','洗碗工','配送员','传菜员'];
-	$scope.PhoneTips = false;
-	$scope.VerCodeTips = false;
+      $ionicLoading.show({
+          template:template
+      })
+
+      $timeout(function(){
+            $ionicLoading.hide()
+        },1500);
+    };
+
+	  $scope.PerApplyParams = {
+        work_type:'',
+        num:'',
+        startDateStr:'',
+        endDateStr:'',
+        startTimeStr:'',
+        endTimeStr:''
+    };
+
+	  $scope.work_type = ['服务员','洗碗工','配送员','传菜员'];
+	  $scope.PhoneTips = false;
+	  $scope.VerCodeTips = false;
 
     $ionicModal.fromTemplateUrl('templates/applys.html',{
         scope:$scope
@@ -59,15 +77,30 @@ angular.module('starter.controllers', [])
     	mondayIsFirstDay: true,//set monday as first day of week. Default is false
 
     	dateClick: function(date) {
-    		console.log(date);
     		if ($scope.dateType){
-    			$scope.PerApplyParams.startDate = date;
-    			$scope.PerApplyParams.startDateStr = (date.month + 1) + '月' + date.day + '日'
+          if (date.date < new Date()){
+              HUD('上工日期应晚于今天');
+          }else if ($scope.PerApplyParams.endDate && date.date > $scope.PerApplyParams.endDate.date){
+              HUD('上工日期应早于结束日期');
+          }else{
+              $scope.PerApplyParams.startDate = date;
+              $scope.PerApplyParams.startDateStr = (date.month + 1) + '月' + date.day + '日' ;
+              $scope.datePickerModal.hide() ;           
+          }
+
     		}else{
-    			$scope.PerApplyParams.endDate = date;
-    			$scope.PerApplyParams.endDateStr = (date.month + 1) + '月' + date.day + '日'    			
+          if ($scope.PerApplyParams.startDate && date.date < $scope.PerApplyParams.startDate.date){
+              HUD('结束日期应晚于上工日期');
+          }else if (date.date < new Date()){
+              HUD('结束日期应晚于今天');
+          }else{
+              $scope.PerApplyParams.endDate = date;
+              $scope.PerApplyParams.endDateStr = (date.month + 1) + '月' + date.day + '日';
+              $scope.datePickerModal.hide();            
+          }
+   			
     		}
-        	$scope.datePickerModal.hide()      
+        	     
     	},
     	changeMonth: function(month, year) {
         
@@ -131,9 +164,69 @@ angular.module('starter.controllers', [])
 
 
     $scope.saveApplying = function(){
-    	$scope.ApplyParams.applys.push($scope.PerApplyParams);
-    	$scope.applysStr = '共'+$scope.ApplyParams.applys.length + '个需求'
-    	$scope.PerApplyParams = {};
+
+      var canAdd = true;
+      if ($scope.PerApplyParams.work_type.length > 0){
+          $scope.work_typeTip = false;
+      }else{
+          $scope.work_typeTip = true;
+          canAdd = false;
+      } 
+      if($scope.PerApplyParams.num.length > 0){
+          $scope.numTip = false;
+      }else{
+          $scope.numTip = true;
+          canAdd = false;
+      }
+      if ($scope.PerApplyParams.startDateStr.length > 0){
+          $scope.startDateTip = false;
+      }else{
+          $scope.startDateTip = true;
+          canAdd = false;
+      }
+      if ($scope.PerApplyParams.endDateStr.length > 0){
+          $scope.endDateTip = false;
+      }else{
+          $scope.endDateTip = true;
+          canAdd = false;
+      }
+      if ($scope.PerApplyParams.startTimeStr.length > 0){
+          $scope.startTimeTip = false;
+      }else{
+          $scope.startTimeTip = true;
+          canAdd = false;
+      }
+      if ($scope.PerApplyParams.endTimeStr.length > 0){
+          $scope.endTimeTip = false;
+      }else {
+          $scope.endTimeTip = true;
+          canAdd = false;
+      }
+
+      if (canAdd){
+          $scope.ApplyParams.applys.push($scope.PerApplyParams);
+          $scope.applysStr = '共'+$scope.ApplyParams.applys.length + '个需求'
+          $scope.PerApplyParams = {
+              work_type:'',
+              num:'',
+              startDateStr:'',
+              endDateStr:'',
+              startTimeStr:'',
+              endTimeStr:''
+          };
+          $scope.work_typeTip = false;  
+          $scope.numTip = false;
+          $scope.startDateTip = false; 
+          $scope.endDateTip = false; 
+          $scope.startTimeTip = false; 
+          $scope.endTimeTip = false;          
+      }
+
+
+
+
+
+
     };
 
 

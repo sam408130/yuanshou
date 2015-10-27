@@ -7,19 +7,13 @@
 
 	<ion-content >
 
-	<div class="card" ng-if="ApplyParams.applys.length > 0">
-  		<div class="item item-divider">已申请</div>
 
-  		<div class="row" ng-repeat="params in ApplyParams.applys" style="text-align:center;">
-  			<div class="col" >{{params.work_type}}</div>
-  			<div class="col">{{params.num}}人</div>
-  			<div class="col">{{params.startDate.date.month+1 + '.'+params.startDate.date.day +'-'+params.endDate.date.month+1 + '.'+params.endDate.date.day}}</div>
-  			<div class="col">{{params.startTimeStr +'~'+params.endTimeStr}}</div>
-		</div>	
-
-	</div>
 
   	<div class="apply">
+
+
+
+
   		<div class="cont">
   			<div id="cont-inner" class="cont-inner bdr4">
 
@@ -34,35 +28,41 @@
 		              	<option ng-repeat="y in work_type" value="{{y}}">{{y}}</option>
 		            </select>
 		            <img src="../img/apply-form-arrow.png" />
+		            <div class="form-tips" ng-if="work_typeTip">请选择需求职位</div>
 		        </div>
 
 		        <div class="form-group">
 		            <label for="name">人数</label>
 		            <input id="name" class="form-control bdr4" ng-model="PerApplyParams.num" type="tel" />
+		            <div class="form-tips" ng-if="numTip">请输入需求人数</div>
 		        </div>		        
 
-		        <div class="form-group ">
+		        <div class="form-group form-group-date">
 		        	<label for="payment">上工日期</label>
-		        	<input class="form-control bdr4" ng-click="startDate()" value="{{PerApplyParams.startDateStr}}"/>  
+		        	<button class="form-control bdr4" ng-click="startDate()" style="text-align:left;">{{PerApplyParams.startDateStr}}</button>
+		        	<div class="form-tips" ng-if="startDateTip">请选择上工日期</div>  
 	            </div>
 
 		        <div class="form-group ">
 		        	<label for="payment">结束日期</label>
-		        	<input class="form-control bdr4" ng-click="endDate()" value="{{PerApplyParams.endDateStr}}"/>
+		        	<button class="form-control bdr4" ng-click="endDate()" style="text-align:left;">{{PerApplyParams.endDateStr}}</button>
+		        	<div class="form-tips" ng-if="endDateTip">请选择结束日期</div>
 	            </div>
 
 
 		        <div class="form-group ">
 		        	<ionic-timepicker input-obj="timePickerObject">
 		        	<label for="payment">上班时间</label>
-		        	<input class="form-control bdr4" value="{{PerApplyParams.startTimeStr}}"/>
+		        	<button class="form-control bdr4" style="text-align:left;">{{PerApplyParams.startTimeStr}}</button>
+		        	<div class="form-tips" ng-if="startTimeTip">请选择上班时间</div>
 		        	</ionic-timepicker>
 	            </div>
 
-		        <div class="form-group ">
+		        <div class="form-group">
 		        	<ionic-timepicker input-obj="timePickerObject_end">
 		        	<label for="payment">下班时间</label>
-		        	<input class="form-control bdr4"  value="{{PerApplyParams.endTimeStr}}"/>
+		        	<button class="form-control bdr4" style="text-align:left;">{{PerApplyParams.endTimeStr}}</button>
+		        	<div class="form-tips" ng-if="endTimeTip">请选择下班</div>
 		        	</ionic-timepicker>
 	            </div>	            
 
@@ -73,7 +73,20 @@
 		        </form>
 		    </div>
   		</div>
-  	</div>     
+  	</div>
+
+  		<div class="card" ng-if="ApplyParams.applys.length > 0">
+  		
+  		<div class="item item-divider">已申请</div>
+
+  		<div class="row" ng-repeat="params in ApplyParams.applys" style="text-align:center;">
+  			<div class="col col-20">{{params.work_type}}</div>
+  			<div class="col col-20">{{params.num}}人</div>
+  			<div class="col col-33">{{(params.startDate.month+1)+'.'+params.startDate.day +'~'+ (params.endDate.month+1)+'.'+params.endDate.day}}</div>
+  			<div class="col col-33">{{params.startTimeStr +'~'+params.endTimeStr}}</div>
+		</div>	
+
+	</div>     
 
     </ion-content>
 </div>
