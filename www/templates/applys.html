@@ -79,7 +79,7 @@
   		
   		<div class="item item-divider">已申请</div>
 
-  		<div class="row" ng-repeat="params in ApplyParams.applys" style="text-align:center;">
+  		<div class="row" ng-repeat="params in ApplyParams.applys track by $index" style="text-align:center;">
   			<div class="col col-20">{{params.work_type}}</div>
   			<div class="col col-20">{{params.num}}人</div>
   			<div class="col col-33">{{(params.startDate.month+1)+'.'+params.startDate.day +'~'+ (params.endDate.month+1)+'.'+params.endDate.day}}</div>

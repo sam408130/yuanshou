@@ -13,14 +13,31 @@ angular.module('starter.controllers', [])
 
 .controller('ApplyCtrl',function($scope,$ionicModal,$ionicLoading,$timeout){
 
-  	$scope.ApplyParams = {
-  		name:'',
-  		address:'',
-  		phone:'',
-  		vercode:'',
-  		applys:[],
+    $scope.curUser = AV.User.current();
+    $scope.ApplyParams = {
+      name:'',
+      address:'',
+      contact:'',
+      phone:'',
+      vercode:'',
+      applys:[],
 
-  	};
+    };    
+
+    if ($scope.curUser){
+        $scope.ApplyParams = {
+          name:$scope.curUser._serverData.dinningName,
+          address:$scope.curUser._serverData.address,
+          contact:$scope.curUser._serverData.contact,
+          phone:$scope.curUser._serverData.username,
+          vercode:'',
+          applys:[],
+
+        };
+    }
+
+    $scope.applyingMat = [];
+    
 
     var HUD = function(template){
 
@@ -43,8 +60,7 @@ angular.module('starter.controllers', [])
     };
 
 	  $scope.work_type = ['服务员','洗碗工','配送员','传菜员'];
-	  $scope.PhoneTips = false;
-	  $scope.VerCodeTips = false;
+
 
     $ionicModal.fromTemplateUrl('templates/applys.html',{
         scope:$scope
@@ -161,7 +177,18 @@ angular.module('starter.controllers', [])
         
       }
     };
-
+    
+    $scope.getVerCode = function(){
+        if ($scope.ApplyParams.phone.length == 0){
+            $scope.phoneTip = true;
+        }else{
+            AV.Cloud.requestSmsCode($scope.ApplyParams.phone).then(function(){
+                HUD('验证码发送成功')
+            }, function(err){
+                HUD(err.message);
+            });
+        }
+    };
 
     $scope.saveApplying = function(){
 
@@ -204,7 +231,9 @@ angular.module('starter.controllers', [])
       }
 
       if (canAdd){
+
           $scope.ApplyParams.applys.push($scope.PerApplyParams);
+          console.log($scope.ApplyParams.applys);
           $scope.applysStr = '共'+$scope.ApplyParams.applys.length + '个需求'
           $scope.PerApplyParams = {
               work_type:'',
@@ -222,12 +251,103 @@ angular.module('starter.controllers', [])
           $scope.endTimeTip = false;          
       }
 
-
-
-
-
-
     };
+
+
+    $scope.post = function(){
+        
+        var canPost = true;
+        if ($scope.ApplyParams.name.length == 0){
+            canPost = false;
+            $scope.nameTip = true;
+        }else{
+            $scope.nameTip = false;
+        }
+
+        if ($scope.ApplyParams.address.length == 0){
+            $scope.addressTip = true;
+            canPost = false;
+        }else{
+            $scope.addressTip = false;
+        }
+
+        if ($scope.ApplyParams.contact.length == 0){
+            canPost = false;
+            $scope.contactTip = true;
+        }else{
+            $scope.contactTip = false;
+        }
+
+        if ($scope.ApplyParams.phone.length == 0){
+            canPost = false;
+            $scope.phoneTip = true;
+        }else{
+            $scope.phoneTip = false;
+        }
+        
+        if ($scope.ApplyParams.vercode.length == 0){
+            $scope.vercodeTip = true;
+            canPost = false;
+        }else{
+            $scope.vercodeTip = false;
+        }
+
+        if ($scope.ApplyParams.applys.length == 0){
+            canPost = false;
+            $scope.applysTip = true;
+        }else{
+            $scope.applysTip = false;
+        }
+
+        if (canPost){
+            if ($scope.curUser){
+                var ApplyObject = AV.Object.extend('ApplySheet');
+                var applyobj = new ApplyObject();
+                applyobj.set('user',$scope.curUser);
+                applyobj.set('requires',$scope.ApplyParams.applys);
+                applyobj.save({
+                    success:function(obj){
+                        HUD('提交成功，我们会尽快为您安排工人')
+                    },
+                    error:function(_,error){
+                        HUD(error.message);
+                    }
+                });                 
+            }else{
+                var user = new AV.User();
+                user.signUpOrlogInWithMobilePhone({
+                    mobilePhoneNumber:$scope.ApplyParams.phone,
+                    smsCode:$scope.ApplyParams.vercode,
+                    contact:$scope.ApplyParams.contact,
+                    dinningName:$scope.ApplyParams.name,
+                    address:$scope.ApplyParams.address
+                },{
+                    success:function(userobj){
+                        var ApplyObject = AV.Object.extend('ApplySheet');
+                        var applyobj = new ApplyObject();
+                        applyobj.set('user',userobj);
+                        applyobj.set('requires',$scope.ApplyParams.applys);
+                        applyobj.save({
+                            success:function(obj){
+                                HUD('提交成功，我们会尽快为您安排工人')
+                                $scope.ApplyParams.applys = [];
+                                $scope.ApplyParams.vercode = '';
+                            },
+                            error:function(_,error){
+                                HUD(error.message);
+                            }
+                        });                                        
+                    },error:function(_,error){
+                        HUD(error.message);
+                    }
+                })                
+            }
+
+            
+
+        }
+    };
+
 
 
 

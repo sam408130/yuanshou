@@ -24,33 +24,36 @@
 			        <div class="form-group">
 			            <label for="name">联系人</label>
 			            <input id="name" class="form-control bdr4" ng-model="ApplyParams.contact" type="text" />
-			            <div class="form-tips" ng-if="contactTip">请输入餐厅联系人姓名</div>
+			            <div class="form-tips" ng-if="contactTip">请填写餐厅联系人姓名</div>
 			        </div>
 
 			        <div class="form-group">
+			        	<label for="payment">职位需求</label>
+			        	<button class="form-control bdr4" ng-click="applysModal.show()" style="text-align:left;">{{applysStr}}</button>
+			        	<div class="form-tips" ng-if="applysTip">请填写您的职位需求</div>
+		            </div>
+
+			        <div class="form-group" >
 	            		<label for="phone">手机号</label>
 	            		<input id="phone" class="form-control bdr4" ng-model="ApplyParams.phone" type="tel" />
 
-	            		<div class="form-tips" ng-if="PhoneTips">请输入正确的手机号码</div>
+	            		<div class="form-tips" ng-if="phoneTip">请输入正确的手机号码</div>
 	          		</div>
 
-			        <div class="form-group ">
+			        <div class="form-group " >
 			            <label for="code">验证码</label>
 			            <input id="code" class="form-control bdr4" ng-model="ApplyParams.vercode" type="tel" />
-			            <div id="getcode" class="getcode">获取验证码</div>
-			            <div class="form-tips" ng-if="VerCodeTips">验证码输入无效</div>
+			            <div id="getcode" class="getcode" ng-click="getVerCode()">获取验证码</div>
+			            <div class="form-tips" ng-if="vercodeTip">验证码输入无效</div>
 			        </div>
 
-			        <div class="form-group form-group-submit">
-			        	<label for="payment">职位需求</label>
-			        	<button class="form-control bdr4" ng-click="applysModal.show()" style="text-align:left;">{{applysStr}}</button>
-		            </div>
+
 
 
 
 
 			        <div class="form-group form-group-submit">
-			            <input id="submit" class="form-submit bdr4" value="提交申请" type="submit" />
+			            <input id="submit" class="form-submit bdr4" value="提交申请" type="submit" ng-click="post()"/>
 			        </div>
 
 		        </form>
